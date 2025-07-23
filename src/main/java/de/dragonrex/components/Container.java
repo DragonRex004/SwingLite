@@ -1,4 +1,4 @@
-﻿package de.dragonrex.components;
+package de.dragonrex.components;
 
 import de.dragonrex.UIComponent;
 import net.miginfocom.swing.MigLayout;

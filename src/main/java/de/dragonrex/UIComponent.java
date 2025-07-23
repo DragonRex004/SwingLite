@@ -40,12 +40,12 @@ public abstract class UIComponent {
         return this;
     }
 
-    public UIComponent backgroundColor(Color color) {
+    public UIComponent background(Color color) {
         this.backgroundColor = color;
         return this;
     }
 
-    public UIComponent foregroundColor(Color color) {
+    public UIComponent foreground(Color color) {
         this.foregroundColor = color;
         return this;
     }

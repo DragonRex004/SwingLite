@@ -68,8 +68,10 @@ dependencies {
 
 Here's a simple example of creating a login form:
 ```java
+package de.dragonrex.test;
+
 import com.formdev.flatlaf.FlatLightLaf;
-import de.dragonrex.components.MButton;
+import de.dragonrex.components.Button;
 import de.dragonrex.components.TextField;
 import de.dragonrex.layout.Row;
 import de.dragonrex.math.Size;
@@ -78,35 +80,43 @@ import de.dragonrex.components.Text;
 import de.dragonrex.layout.Column;
 import de.dragonrex.style.Padding;
 
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
-        GradientPaint gp = new GradientPaint(0, 0, new Color(66, 133, 244),
-                100, 40, new Color(52, 168, 83));
         UI.build(
                 "",
                 Size.of(800, 600),
                 new FlatLightLaf(),
                 Column.of(
-                        Padding.of(10, 50, 10, 10,
-                                Text.of("Username")
+                        Padding.of(100, 350, 10, 10,
+                                Text.of("Login Form")
                                         .fontSize(14).bold()
                                         .size(200, 30)
                         ),
-                        Padding.of(0, 10, 10, 10,
+                        Padding.of(0, 300, 10, 10,
                                 TextField.of()
-                                        .initialText("z.B. Max Mustermann")
+                                        .placeholder("Enter your username")
                                         .columns(1)
-                                        .size(300, 40)
+                                        .size(200, 40)
+                        ),
+                        Padding.of(0, 300, 10, 10,
+                                TextField.of()
+                                        .placeholder("Enter your password")
+                                        .columns(1)
+                                        .size(200, 40)
                         ),
                         Row.of(
-                                Padding.of(0, 10, 10, 5,
-                                        MButton.of("Login")
+                                Padding.of(0, 295, 10, 5,
+                                        Button.of("Login")
                                                 .onClick(() -> System.out.println("Login clicked"))
                                                 .size(100, 40)
+                                                .background(Color.RED)
                                 ),
                                 Padding.of(0, 5, 10, 10,
-                                        MButton.of("Cancel")
+                                        Button.of("Cancel")
                                                 .onClick(() -> System.out.println("Login canceled"))
+                                                .gradient(Color.GREEN, Color.BLUE)
                                                 .size(100, 40)
                                 )
                         )
@@ -115,6 +125,8 @@ public class Main {
     }
 }
 ```
+## Screenshot for Main.java
+<img src="assets/LoginFormBsp.png" alt="Login Form">
 
 
 ## Styling Properties
