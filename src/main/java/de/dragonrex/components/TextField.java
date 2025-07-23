@@ -27,6 +27,8 @@ public class TextField extends UIComponent {
     private Runnable onFocus = () -> {};
     private Runnable onFocusLost = () -> {};
     private Consumer<KeyEvent> onKeyPress = event -> {};
+    private Consumer<KeyEvent> onKeyTyped = event -> {};
+    private Consumer<KeyEvent> onKeyRelease = event -> {};
 
 
     public static TextField of() {
@@ -93,6 +95,16 @@ public class TextField extends UIComponent {
         return this;
     }
 
+    public TextField onKeyTyped(Consumer<KeyEvent> action) {
+        this.onKeyTyped = action;
+        return this;
+    }
+
+    public TextField onKeyRelease(Consumer<KeyEvent> action) {
+        this.onKeyRelease = action;
+        return this;
+    }
+
 
     @Override
     public JComponent render() {
@@ -150,11 +162,11 @@ public class TextField extends UIComponent {
 
         field.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                if (onKeyPress != null) {
-                    onKeyPress.accept(e);
-                }
-            }
+            public void keyTyped(KeyEvent e) {onKeyTyped.accept(e);}
+            @Override
+            public void keyPressed(KeyEvent e) {onKeyPress.accept(e);}
+            @Override
+            public void keyReleased(KeyEvent e) {onKeyRelease.accept(e);}
         });
 
         field.setFont(font);

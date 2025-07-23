@@ -21,6 +21,7 @@ public class Padding extends UIComponent {
     @Override
     public JComponent render() {
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setOpaque(false);
         panel.setBorder(BorderFactory.createEmptyBorder(
                 insets.top, insets.left, insets.bottom, insets.right
         ));

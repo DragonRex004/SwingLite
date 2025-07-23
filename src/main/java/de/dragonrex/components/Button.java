@@ -4,16 +4,31 @@ import de.dragonrex.UIComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Button extends UIComponent {
     private String text;
-    private Runnable onClick;
     private int cornerRadius = 0;
     private Paint backgroundPaint = null;
     private Color backgroundColor = null;
 
+    private Runnable onClick = () -> {};
+    private Runnable onEnter = () -> {};
+    private Runnable onExit = () -> {};
+
     public static Button of(String text) {
         return new Button(text);
+    }
+
+    public Button onEnter(Runnable action) {
+        this.onEnter = action;
+        return this;
+    }
+
+    public Button onExit(Runnable action) {
+        this.onExit = action;
+        return this;
     }
 
     private Button(String text) {
@@ -74,9 +89,14 @@ public class Button extends UIComponent {
                 super.paintComponent(g);
             }
         };
-        if (onClick != null) {
-            button.addActionListener(e -> onClick.run());
-        }
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {onClick.run();}
+            @Override
+            public void mouseEntered(MouseEvent e) {onEnter.run();}
+            @Override
+            public void mouseExited(MouseEvent e) {onExit.run();}
+        });
         applyProperties(button);
         return button;
     }

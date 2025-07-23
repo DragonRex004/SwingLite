@@ -18,7 +18,8 @@ public class Row extends UIComponent {
     @Override
     public JComponent render() {
         JPanel panel = new JPanel(new MigLayout("insets 0, gap 5"));
-        
+        panel.setOpaque(false);
+
         for (UIComponent child : children) {
             panel.add(child.render(), "");
         }

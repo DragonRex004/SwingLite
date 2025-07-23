@@ -18,6 +18,7 @@ public class Column extends UIComponent {
     @Override
     public JComponent render() {
         JPanel panel = new JPanel(new MigLayout("insets 0, gap 5, flowy"));
+        panel.setOpaque(false);
         
         for (UIComponent child : children) {
             panel.add(child.render(), "");
